@@ -755,6 +755,140 @@
             font-weight: 500;
         }
         
+        /* شريط العملات العرضي */
+        .ticker-bar {
+            background: linear-gradient(135deg, #232337, #1a1a2e);
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #373757;
+            overflow: hidden;
+            position: relative;
+            white-space: nowrap;
+        }
+        
+        .ticker-container {
+            display: inline-block;
+            animation: ticker 60s linear infinite;
+            padding-left: 100%;
+        }
+        
+        @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+        
+        .ticker-item {
+            display: inline-block;
+            margin: 0 2rem;
+            padding: 0.5rem 1rem;
+            background: rgba(240, 185, 11, 0.1);
+            border-radius: 20px;
+            border: 1px solid rgba(240, 185, 11, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 120px;
+            text-align: center;
+        }
+        
+        .ticker-item:hover {
+            background: rgba(240, 185, 11, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(240, 185, 11, 0.3);
+        }
+        
+        .ticker-item.active {
+            background: #f0b90b;
+            color: #000;
+            border-color: #f0b90b;
+        }
+        
+        .ticker-symbol {
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .ticker-price {
+            font-size: 0.8rem;
+            color: #10b981;
+        }
+        
+        .ticker-change {
+            font-size: 0.7rem;
+            margin-top: 0.25rem;
+        }
+        
+        .ticker-change.positive { color: #10b981; }
+        .ticker-change.negative { color: #ef4444; }
+        
+        /* مؤشر التحميل */
+        .loading-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            color: #9ca3af;
+        }
+        
+        .loading-indicator::before {
+            content: '';
+            width: 20px;
+            height: 20px;
+            border: 2px solid #4b5563;
+            border-top: 2px solid #f0b90b;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 0.5rem;
+        }
+        
+        /* رسائل الخطأ */
+        .error-message {
+            background: rgba(239, 68, 68, 0.1);
+            color: #ef4444;
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            margin: 1rem 0;
+            text-align: center;
+        }
+        
+        /* إحصائيات API */
+        .api-stats {
+            background: linear-gradient(135deg, #2a2a3a, #232337);
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            border: 1px solid #373757;
+            text-align: center;
+        }
+        
+        .api-status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(16, 185, 129, 0.1);
+            border-radius: 20px;
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            font-size: 0.9rem;
+        }
+        
+        .api-status-indicator.offline {
+            background: rgba(239, 68, 68, 0.1);
+            border-color: rgba(239, 68, 68, 0.3);
+        }
+        
+        .api-status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #10b981;
+            animation: pulse 2s infinite;
+        }
+        
+        .api-status-dot.offline {
+            background: #ef4444;
+        }
+        
         /* النوافذ المنبثقة */
         .modal {
             position: fixed;
@@ -806,6 +940,34 @@
             .quick-actions {
                 grid-template-columns: 1fr;
             }
+            
+            /* تحسينات شريط العملات للموبايل */
+            .ticker-bar {
+                padding: 0.5rem 0;
+            }
+            
+            .ticker-item {
+                margin: 0 1rem;
+                min-width: 100px;
+                padding: 0.4rem 0.8rem;
+            }
+            
+            .ticker-symbol {
+                font-size: 0.8rem;
+            }
+            
+            .ticker-price {
+                font-size: 0.7rem;
+            }
+            
+            .ticker-change {
+                font-size: 0.6rem;
+            }
+            
+            /* إبطاء التمرير للموبايل */
+            .ticker-container {
+                animation-duration: 90s;
+            }
         }
     </style>
 </head>
@@ -827,6 +989,13 @@
     
     <!-- منطقة الإشعارات -->
     <div class="notifications" id="notifications"></div>
+    
+    <!-- شريط العملات العرضي -->
+    <div class="ticker-bar">
+        <div class="ticker-container" id="tickerContainer">
+            <!-- سيتم ملؤها ديناميكياً -->
+        </div>
+    </div>
     
     <!-- المحتوى الرئيسي -->
     <main class="main-content">
@@ -858,6 +1027,18 @@
                 <div class="quick-action" onclick="showMarketInsights()">
                     <div class="icon">📊</div>
                     <div class="label">رؤى السوق</div>
+                </div>
+            </div>
+            
+            <!-- إحصائيات API -->
+            <div class="api-stats">
+                <div class="api-status-indicator" id="apiStatusIndicator">
+                    <div class="api-status-dot" id="apiStatusDot"></div>
+                    <span id="apiStatusText">متصل بـ Binance API</span>
+                </div>
+                <div style="margin-top: 1rem; font-size: 0.9rem; color: #9ca3af;">
+                    آخر تحديث: <span id="lastUpdateTime">-</span> | 
+                    عدد الطلبات: <span id="requestCount">0</span>
                 </div>
             </div>
             
@@ -1136,15 +1317,25 @@
         let priceAlerts = [];
         let favoritePairs = ['BTCUSDT', 'ETHUSDT', 'BNBUSDT', 'ADAUSDT', 'SOLUSDT'];
         
+        // متغيرات API
+        let apiRequestCount = 0;
+        let lastApiUpdate = null;
+        let tickerData = [];
+        let apiStatus = 'connecting';
+        
+        // تكوين API
+        const BINANCE_API_BASE = 'https://api.binance.com';
+        const TICKER_SYMBOLS = [
+            'BTCUSDT', 'ETHUSDT', 'BNBUSDT', 'ADAUSDT', 'SOLUSDT', 
+            'DOGEUSDT', 'XRPUSDT', 'DOTUSDT', 'MATICUSDT', 'LINKUSDT',
+            'AVAXUSDT', 'UNIUSDT', 'ATOMUSDT', 'LTCUSDT', 'BCHUSDT'
+        ];
+        
         // تهيئة التطبيق
         document.addEventListener('DOMContentLoaded', function() {
             console.log('🚀 بدء تشغيل تطبيق Binance Trading Pro');
             updateServerTime();
-            loadMarketData();
-            simulatePriceUpdates();
-            initializeCharts();
-            updateIndicators();
-            updateWalletValue();
+            initializeBinanceAPI();
             setupEventListeners();
             checkPriceAlerts();
         });
@@ -1317,32 +1508,144 @@
             setTimeout(updateServerTime, 1000);
         }
         
-        // تحميل بيانات السوق
-        async function loadMarketData() {
+        // تهيئة API Binance
+        async function initializeBinanceAPI() {
             try {
-                const mockData = {
-                    volume: '2.5B',
-                    high: '46,200',
-                    low: '44,100',
-                    count: '125K'
-                };
+                console.log('🔌 بدء الاتصال بـ Binance API...');
+                updateApiStatus('connecting', 'جاري الاتصال...');
                 
-                document.getElementById('volume24h').textContent = mockData.volume;
-                document.getElementById('high24h').textContent = `$${mockData.high}`;
-                document.getElementById('low24h').textContent = `$${mockData.low}`;
-                document.getElementById('count24h').textContent = mockData.count;
+                // اختبار الاتصال
+                const pingResponse = await fetch(`${BINANCE_API_BASE}/api/v3/ping`);
+                if (!pingResponse.ok) {
+                    throw new Error('فشل في الاتصال بـ Binance API');
+                }
+                
+                updateApiStatus('online', 'متصل بـ Binance API');
+                console.log('✅ تم الاتصال بنجاح بـ Binance API');
+                
+                // بدء جلب البيانات
+                loadTickerData();
+                loadCurrentPairData();
+                
+                // تحديث البيانات كل 10 ثوان
+                setInterval(loadTickerData, 10000);
+                setInterval(loadCurrentPairData, 5000);
+                
+                // تهيئة الرسوم البيانية والمؤشرات
+                initializeCharts();
+                updateIndicators();
+                updateWalletValue();
                 
             } catch (error) {
-                console.error('خطأ في تحميل بيانات السوق:', error);
+                console.error('❌ خطأ في الاتصال بـ Binance API:', error);
+                updateApiStatus('offline', 'غير متصل - تحقق من الاتصال');
+                showNotification('فشل في الاتصال بـ Binance API', 'error');
             }
         }
         
-        // محاكاة تحديثات السعر
-        function simulatePriceUpdates() {
-            setInterval(() => {
-                const change = (Math.random() - 0.5) * 1000;
-                const newPrice = lastPrice + change;
-                const priceChange = ((newPrice - lastPrice) / lastPrice * 100);
+        // تحديث حالة API
+        function updateApiStatus(status, message) {
+            apiStatus = status;
+            const indicator = document.getElementById('apiStatusIndicator');
+            const dot = document.getElementById('apiStatusDot');
+            const text = document.getElementById('apiStatusText');
+            
+            indicator.className = `api-status-indicator ${status === 'offline' ? 'offline' : ''}`;
+            dot.className = `api-status-dot ${status === 'offline' ? 'offline' : ''}`;
+            text.textContent = message;
+        }
+        
+        // جلب بيانات العملات
+        async function loadTickerData() {
+            try {
+                const symbols = TICKER_SYMBOLS.join(',');
+                const response = await fetch(`${BINANCE_API_BASE}/api/v3/ticker/24hr?symbols=${symbols}`);
+                
+                if (!response.ok) {
+                    throw new Error('فشل في جلب بيانات العملات');
+                }
+                
+                const data = await response.json();
+                tickerData = data;
+                
+                updateTickerBar();
+                updateApiStats();
+                
+                console.log('✅ تم تحديث بيانات العملات');
+                
+            } catch (error) {
+                console.error('❌ خطأ في جلب بيانات العملات:', error);
+                showNotification('فشل في تحديث بيانات العملات', 'error');
+            }
+        }
+        
+        // تحديث شريط العملات
+        function updateTickerBar() {
+            const container = document.getElementById('tickerContainer');
+            let html = '';
+            
+            tickerData.forEach(ticker => {
+                const symbol = ticker.symbol;
+                const price = parseFloat(ticker.lastPrice);
+                const change = parseFloat(ticker.priceChangePercent);
+                const isActive = symbol === currentPair;
+                
+                html += `
+                    <div class="ticker-item ${isActive ? 'active' : ''}" onclick="selectTicker('${symbol}')">
+                        <div class="ticker-symbol">${symbol.replace('USDT', '')}</div>
+                        <div class="ticker-price">$${price.toFixed(2)}</div>
+                        <div class="ticker-change ${change >= 0 ? 'positive' : 'negative'}">
+                            ${change >= 0 ? '+' : ''}${change.toFixed(2)}%
+                        </div>
+                    </div>
+                `;
+            });
+            
+            // تكرار البيانات للتمرير المستمر
+            html += html;
+            container.innerHTML = html;
+        }
+        
+        // اختيار عملة من الشريط
+        function selectTicker(symbol) {
+            if (symbol === currentPair) return;
+            
+            currentPair = symbol;
+            document.getElementById('pairName').textContent = symbol.replace('USDT', '/USDT');
+            
+            // تحديث المفضلة
+            document.querySelectorAll('.favorite-pair').forEach(pair => {
+                pair.classList.remove('active');
+            });
+            
+            // البحث عن العملة في المفضلة
+            const favoriteElement = Array.from(document.querySelectorAll('.favorite-pair'))
+                .find(el => el.textContent.includes(symbol.replace('USDT', '')));
+            
+            if (favoriteElement) {
+                favoriteElement.classList.add('active');
+            }
+            
+            // تحديث الرسم البياني
+            updatePriceChart();
+            
+            showNotification(`تم تغيير الزوج إلى ${symbol}`, 'success');
+        }
+        
+        // جلب بيانات الزوج الحالي
+        async function loadCurrentPairData() {
+            try {
+                const response = await fetch(`${BINANCE_API_BASE}/api/v3/ticker/24hr?symbol=${currentPair}`);
+                
+                if (!response.ok) {
+                    throw new Error('فشل في جلب بيانات الزوج الحالي');
+                }
+                
+                const data = await response.json();
+                
+                // تحديث السعر
+                const newPrice = parseFloat(data.lastPrice);
+                const priceChange = parseFloat(data.priceChangePercent);
                 
                 document.getElementById('currentPrice').textContent = `$${newPrice.toFixed(2)}`;
                 
@@ -1352,9 +1655,56 @@
                 
                 lastPrice = newPrice;
                 
+                // تحديث إحصائيات السوق
+                document.getElementById('volume24h').textContent = formatVolume(data.volume);
+                document.getElementById('high24h').textContent = `$${parseFloat(data.highPrice).toFixed(2)}`;
+                document.getElementById('low24h').textContent = `$${parseFloat(data.lowPrice).toFixed(2)}`;
+                document.getElementById('count24h').textContent = formatNumber(data.count);
+                
                 // تحديث الرسم البياني
                 updatePriceChart();
-            }, 3000);
+                
+                updateApiStats();
+                
+            } catch (error) {
+                console.error('❌ خطأ في جلب بيانات الزوج الحالي:', error);
+            }
+        }
+        
+        // تحديث إحصائيات API
+        function updateApiStats() {
+            apiRequestCount++;
+            lastApiUpdate = new Date();
+            
+            document.getElementById('requestCount').textContent = apiRequestCount;
+            document.getElementById('lastUpdateTime').textContent = lastApiUpdate.toLocaleTimeString('ar-SA');
+        }
+        
+        // تنسيق الأرقام
+        function formatVolume(volume) {
+            const num = parseFloat(volume);
+            if (num >= 1000000000) {
+                return (num / 1000000000).toFixed(2) + 'B';
+            } else if (num >= 1000000) {
+                return (num / 1000000).toFixed(2) + 'M';
+            } else if (num >= 1000) {
+                return (num / 1000).toFixed(2) + 'K';
+            } else {
+                return num.toFixed(2);
+            }
+        }
+        
+        function formatNumber(num) {
+            const number = parseFloat(num);
+            if (number >= 1000000000) {
+                return (number / 1000000000).toFixed(2) + 'B';
+            } else if (number >= 1000000) {
+                return (number / 1000000).toFixed(2) + 'M';
+            } else if (number >= 1000) {
+                return (number / 1000).toFixed(2) + 'K';
+            } else {
+                return number.toFixed(2);
+            }
         }
         
         // تهيئة الرسوم البيانية
