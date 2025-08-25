@@ -519,6 +519,294 @@
                 padding: 0.4rem 0.8rem;
             }
         }
+        
+        /* ميزات تجربة المستخدم */
+        .theme-toggle {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 1000;
+            background: rgba(240, 185, 11, 0.2);
+            border: 1px solid #f0b90b;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.5rem;
+        }
+        
+        .theme-toggle:hover {
+            background: rgba(240, 185, 11, 0.3);
+            transform: scale(1.1);
+        }
+        
+        .search-bar {
+            background: linear-gradient(135deg, #2a2a3a, #232337);
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            border: 1px solid #373757;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #4b5563;
+            border-radius: 8px;
+            background: #374151;
+            color: #e5e5e5;
+            font-size: 1rem;
+            text-align: center;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            border-color: #f0b90b;
+            box-shadow: 0 0 0 3px rgba(240, 185, 11, 0.2);
+        }
+        
+        .favorites {
+            background: linear-gradient(135deg, #2a2a3a, #232337);
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            border: 1px solid #373757;
+        }
+        
+        .favorite-pairs {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .favorite-pair {
+            padding: 0.5rem 1rem;
+            background: rgba(240, 185, 11, 0.1);
+            border: 1px solid rgba(240, 185, 11, 0.3);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .favorite-pair:hover {
+            background: rgba(240, 185, 11, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .favorite-pair.active {
+            background: #f0b90b;
+            color: #000;
+        }
+        
+        .notifications {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 1000;
+            max-width: 300px;
+        }
+        
+        .notification {
+            background: linear-gradient(135deg, #2a2a3a, #232337);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            border: 1px solid #373757;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            animation: slideIn 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .notification.success {
+            border-left: 4px solid #10b981;
+        }
+        
+        .notification.warning {
+            border-left: 4px solid #f59e0b;
+        }
+        
+        .notification.error {
+            border-left: 4px solid #ef4444;
+        }
+        
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        .price-alert {
+            background: linear-gradient(135deg, #2a2a3a, #232337);
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            border: 1px solid #373757;
+        }
+        
+        .alert-form {
+            display: grid;
+            gap: 1rem;
+        }
+        
+        .alert-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .alert-btn {
+            padding: 0.75rem;
+            border: none;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .alert-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+        }
+        
+        .market-insights {
+            background: linear-gradient(135deg, #2a2a3a, #232337);
+            padding: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            border: 1px solid #373757;
+        }
+        
+        .insight-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            background: rgba(240, 185, 11, 0.05);
+            border-radius: 8px;
+            border: 1px solid rgba(240, 185, 11, 0.1);
+        }
+        
+        .insight-sentiment {
+            padding: 0.25rem 0.5rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .sentiment-bullish {
+            background: rgba(16, 185, 129, 0.2);
+            color: #10b981;
+        }
+        
+        .sentiment-bearish {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+        
+        .sentiment-neutral {
+            background: rgba(156, 163, 175, 0.2);
+            color: #9ca3af;
+        }
+        
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        
+        .quick-action {
+            background: linear-gradient(135deg, #374151, #4b5563);
+            padding: 1rem;
+            border-radius: 12px;
+            border: 1px solid #6b7280;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .quick-action:hover {
+            transform: translateY(-3px);
+            border-color: #f0b90b;
+        }
+        
+        .quick-action .icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .quick-action .label {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        /* النوافذ المنبثقة */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: linear-gradient(135deg, #2a2a3a, #232337);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid #373757;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+        }
+        
+        /* تحسينات إضافية للموبايل */
+        @media (max-width: 480px) {
+            .theme-toggle {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .modal-content {
+                padding: 1rem;
+                margin: 1rem;
+            }
+            
+            .favorite-pairs {
+                justify-content: center;
+            }
+            
+            .favorite-pair {
+                font-size: 0.8rem;
+                padding: 0.4rem 0.8rem;
+            }
+            
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -532,10 +820,47 @@
         </div>
     </header>
     
+    <!-- زر تبديل المظهر -->
+    <button class="theme-toggle" onclick="toggleTheme()" title="تبديل المظهر">
+        🌙
+    </button>
+    
+    <!-- منطقة الإشعارات -->
+    <div class="notifications" id="notifications"></div>
+    
     <!-- المحتوى الرئيسي -->
     <main class="main-content">
         <!-- صفحة التداول -->
         <div id="trading-page" class="page active">
+            <!-- شريط البحث -->
+            <div class="search-bar">
+                <input type="text" class="search-input" id="searchInput" placeholder="🔍 ابحث عن العملة..." oninput="searchCurrency(this.value)">
+            </div>
+            
+            <!-- المفضلة -->
+            <div class="favorites">
+                <h3 style="margin-bottom: 1rem; color: #f0b90b; text-align: center;">المفضلة</h3>
+                <div class="favorite-pairs">
+                    <div class="favorite-pair active" onclick="changePair('BTCUSDT')">BTC/USDT</div>
+                    <div class="favorite-pair" onclick="changePair('ETHUSDT')">ETH/USDT</div>
+                    <div class="favorite-pair" onclick="changePair('BNBUSDT')">BNB/USDT</div>
+                    <div class="favorite-pair" onclick="changePair('ADAUSDT')">ADA/USDT</div>
+                    <div class="favorite-pair" onclick="changePair('SOLUSDT')">SOL/USDT</div>
+                </div>
+            </div>
+            
+            <!-- الإجراءات السريعة -->
+            <div class="quick-actions">
+                <div class="quick-action" onclick="showPriceAlert()">
+                    <div class="icon">🔔</div>
+                    <div class="label">تنبيه السعر</div>
+                </div>
+                <div class="quick-action" onclick="showMarketInsights()">
+                    <div class="icon">📊</div>
+                    <div class="label">رؤى السوق</div>
+                </div>
+            </div>
+            
             <!-- بطاقة السعر -->
             <div class="price-card">
                 <div class="pair-name" id="pairName">BTC/USDT</div>
@@ -723,6 +1048,64 @@
         </div>
     </main>
     
+    <!-- نافذة تنبيه السعر -->
+    <div id="priceAlertModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3 style="margin-bottom: 1rem; color: #f0b90b; text-align: center;">تنبيه السعر</h3>
+            <div class="price-alert">
+                <form class="alert-form" id="alertForm">
+                    <div class="alert-row">
+                        <div class="form-group">
+                            <label class="form-label">السعر المستهدف</label>
+                            <input type="number" class="form-input" id="targetPrice" step="0.01" placeholder="45000" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">نوع التنبيه</label>
+                            <select class="form-input" id="alertType">
+                                <option value="above">أعلى من</option>
+                                <option value="below">أقل من</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="alert-row">
+                        <button type="submit" class="alert-btn">إعداد التنبيه</button>
+                        <button type="button" class="alert-btn" onclick="closeModal('priceAlertModal')" style="background: linear-gradient(135deg, #6b7280, #4b5563);">إلغاء</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- نافذة رؤى السوق -->
+    <div id="marketInsightsModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h3 style="margin-bottom: 1rem; color: #f0b90b; text-align: center;">رؤى السوق</h3>
+            <div class="market-insights">
+                <div class="insight-item">
+                    <span>مؤشر RSI</span>
+                    <span class="insight-sentiment sentiment-bullish">إيجابي</span>
+                </div>
+                <div class="insight-item">
+                    <span>مؤشر MACD</span>
+                    <span class="insight-sentiment sentiment-bearish">سلبي</span>
+                </div>
+                <div class="insight-item">
+                    <span>مستوى الدعم</span>
+                    <span>$44,200</span>
+                </div>
+                <div class="insight-item">
+                    <span>مستوى المقاومة</span>
+                    <span>$46,800</span>
+                </div>
+                <div class="insight-item">
+                    <span>توصية</span>
+                    <span class="insight-sentiment sentiment-neutral">انتظار</span>
+                </div>
+            </div>
+            <button class="alert-btn" onclick="closeModal('marketInsightsModal')" style="width: 100%; margin-top: 1rem;">إغلاق</button>
+        </div>
+    </div>
+    
     <!-- الأزرار السفلية -->
     <nav class="bottom-nav">
         <div class="nav-buttons">
@@ -749,6 +1132,9 @@
         let currentTimeframe = '1m';
         let priceChart = null;
         let walletChart = null;
+        let isDarkTheme = true;
+        let priceAlerts = [];
+        let favoritePairs = ['BTCUSDT', 'ETHUSDT', 'BNBUSDT', 'ADAUSDT', 'SOLUSDT'];
         
         // تهيئة التطبيق
         document.addEventListener('DOMContentLoaded', function() {
@@ -759,7 +1145,166 @@
             initializeCharts();
             updateIndicators();
             updateWalletValue();
+            setupEventListeners();
+            checkPriceAlerts();
         });
+        
+        // إعداد مستمعي الأحداث
+        function setupEventListeners() {
+            // نموذج التنبيه
+            document.getElementById('alertForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                setupPriceAlert();
+            });
+            
+            // إغلاق النوافذ عند النقر خارجها
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('modal')) {
+                    e.target.style.display = 'none';
+                }
+            });
+        }
+        
+        // تبديل المظهر
+        function toggleTheme() {
+            isDarkTheme = !isDarkTheme;
+            const themeToggle = document.querySelector('.theme-toggle');
+            
+            if (isDarkTheme) {
+                document.body.style.background = 'linear-gradient(135deg, #1e1e2e 0%, #181829 100%)';
+                themeToggle.innerHTML = '🌙';
+                themeToggle.title = 'تبديل إلى الوضع الفاتح';
+                showNotification('تم تفعيل الوضع المظلم', 'success');
+            } else {
+                document.body.style.background = 'linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%)';
+                themeToggle.innerHTML = '☀️';
+                themeToggle.title = 'تبديل إلى الوضع المظلم';
+                showNotification('تم تفعيل الوضع الفاتح', 'success');
+            }
+        }
+        
+        // البحث عن العملات
+        function searchCurrency(query) {
+            if (query.length < 2) return;
+            
+            const searchResults = favoritePairs.filter(pair => 
+                pair.toLowerCase().includes(query.toLowerCase())
+            );
+            
+            if (searchResults.length > 0) {
+                showNotification(`تم العثور على ${searchResults.length} عملة`, 'success');
+            } else {
+                showNotification('لم يتم العثور على نتائج', 'warning');
+            }
+        }
+        
+        // إظهار تنبيه السعر
+        function showPriceAlert() {
+            document.getElementById('priceAlertModal').style.display = 'flex';
+        }
+        
+        // إظهار رؤى السوق
+        function showMarketInsights() {
+            document.getElementById('marketInsightsModal').style.display = 'flex';
+        }
+        
+        // إغلاق النافذة المنبثقة
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+        
+        // إعداد تنبيه السعر
+        function setupPriceAlert() {
+            const targetPrice = parseFloat(document.getElementById('targetPrice').value);
+            const alertType = document.getElementById('alertType').value;
+            
+            if (!targetPrice) {
+                showNotification('يرجى إدخال سعر صحيح', 'error');
+                return;
+            }
+            
+            const alert = {
+                id: Date.now(),
+                pair: currentPair,
+                targetPrice: targetPrice,
+                type: alertType,
+                active: true,
+                timestamp: new Date().toLocaleString('ar-SA')
+            };
+            
+            priceAlerts.push(alert);
+            closeModal('priceAlertModal');
+            
+            showNotification(`تم إعداد تنبيه السعر لـ ${currentPair}`, 'success');
+            
+            // إعادة تعيين النموذج
+            document.getElementById('alertForm').reset();
+        }
+        
+        // فحص تنبيهات السعر
+        function checkPriceAlerts() {
+            setInterval(() => {
+                priceAlerts.forEach((alert, index) => {
+                    if (!alert.active) return;
+                    
+                    let shouldTrigger = false;
+                    
+                    if (alert.type === 'above' && lastPrice >= alert.targetPrice) {
+                        shouldTrigger = true;
+                    } else if (alert.type === 'below' && lastPrice <= alert.targetPrice) {
+                        shouldTrigger = true;
+                    }
+                    
+                    if (shouldTrigger) {
+                        showNotification(
+                            `تنبيه! ${alert.pair} وصل إلى $${lastPrice.toFixed(2)}`,
+                            'warning'
+                        );
+                        alert.active = false;
+                    }
+                });
+            }, 1000);
+        }
+        
+        // إظهار الإشعارات
+        function showNotification(message, type = 'success') {
+            const notifications = document.getElementById('notifications');
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            
+            const icon = type === 'success' ? '✅' : type === 'warning' ? '⚠️' : '❌';
+            notification.innerHTML = `${icon} ${message}`;
+            
+            notifications.appendChild(notification);
+            
+            // إزالة الإشعار بعد 5 ثوان
+            setTimeout(() => {
+                notification.remove();
+            }, 5000);
+        }
+        
+        // تغيير الزوج المالي
+        function changePair(newPair) {
+            if (newPair === currentPair) return;
+            
+            // تحديث المفضلة
+            document.querySelectorAll('.favorite-pair').forEach(pair => {
+                pair.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            currentPair = newPair;
+            document.getElementById('pairName').textContent = newPair.replace('USDT', '/USDT');
+            
+            // تحديث السعر
+            lastPrice = 45000 + (Math.random() - 0.5) * 2000;
+            document.getElementById('currentPrice').textContent = `$${lastPrice.toFixed(2)}`;
+            
+            // تحديث الرسم البياني
+            updatePriceChart();
+            
+            showNotification(`تم تغيير الزوج إلى ${newPair}`, 'success');
+        }
         
         // تحديث الوقت
         function updateServerTime() {
